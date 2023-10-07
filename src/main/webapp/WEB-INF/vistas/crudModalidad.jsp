@@ -244,6 +244,8 @@ $("#id_btn_filtrar").click(function(){
 	});
 });
 
+
+
 function agregarGrilla(lista){
 	 $('#id_table').DataTable().clear();
 	 $('#id_table').DataTable().destroy();
