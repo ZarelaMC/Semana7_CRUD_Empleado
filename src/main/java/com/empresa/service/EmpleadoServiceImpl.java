@@ -40,4 +40,9 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 		return repository.listarNombreApellidoIgual(nombre, apellido);
 	}
 
+	@Override
+	public List<Empleado> listaPorNombreApellidoIgualActualiza(String nombre, String apellido, int idEmpleado) {
+		return repository.listaEmpleadoNombreApellidoIgualActualiza(nombre, apellido, idEmpleado);
+	}
+
 }

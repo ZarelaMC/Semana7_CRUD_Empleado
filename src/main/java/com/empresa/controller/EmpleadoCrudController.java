@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import com.empresa.entity.Empleado;
 import com.empresa.service.EmpleadoService;
 import com.empresa.util.FunctionUtil;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class EmpleadoCrudController {
 	@Autowired
@@ -23,7 +26,7 @@ public class EmpleadoCrudController {
 	
 	//Cargar el .jsp
 	@GetMapping(value = "/verCrudEmpleado") /*RUTA*/
-	public String verEmpleado()  {return "crudEmpleado2";} /*nombre del .JSP*/
+	public String verEmpleado()  {return "crudEmpleado";} /*nombre del .JSP*/
 	
 	@GetMapping(value = "/consultaCrudEmpleado") 
 	@ResponseBody //RESPUESTA DE CUERPO DE TIPO .JSON
@@ -67,6 +70,58 @@ public class EmpleadoCrudController {
 			map.put("lista", lista);
 			//Mostrar mensaje de confirmación
 			map.put("mensaje", "Registro exitoso");
+		}
+		return map;
+	}
+	
+	//ACTUALIZAR  ----------------------------------------------
+	@PostMapping("/actualizaCrudEmpleado")
+	@ResponseBody
+	public Map<?, ?> actualiza(Empleado obj, HttpSession session) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		Optional<Empleado> optEmpleado= empleadoService.buscaEmpleado(obj.getIdEmpleado());
+		
+		//Validaciones por nombre y apellido
+		List<Empleado> lstSalida = empleadoService.listaPorNombreApellidoIgualActualiza(obj.getNombres(), obj.getApellidos(), optEmpleado.get().getIdEmpleado());
+		if (!CollectionUtils.isEmpty(lstSalida)) {
+			map.put("mensaje", "El empleado " + obj.getNombres()+ " " + obj.getApellidos() + " ya existe");
+			List<Empleado> lista = empleadoService.listaPorNombreApellidoLike("%");
+			map.put("lista", lista);
+			return map;
+		}
+				
+		obj.setFechaRegistro(optEmpleado.get().getFechaRegistro());
+		obj.setEstado(optEmpleado.get().getEstado());
+		obj.setFechaActualizacion(new Date());
+		
+		Empleado objSalida = empleadoService.actualizaEmpleado(obj);
+		if (objSalida == null) {
+			map.put("mensaje", "Error en actualizar");
+		} else {
+			map.put("mensaje", "Actualización exitosa");
+			List<Empleado> lista = empleadoService.listaPorNombreApellidoLike("%");
+			map.put("lista", lista);
+		}
+		return map;
+	}
+	
+	
+	//ELIMINAR ----------------------------------------------
+	@ResponseBody
+	@PostMapping("/eliminaCrudEmpleado")
+	public Map<?, ?> elimina(int id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		Empleado objEmpleado= empleadoService.buscaEmpleado(id).get();
+		objEmpleado.setFechaActualizacion(new Date());  
+		objEmpleado.setEstado( objEmpleado.getEstado() == 1 ? 0 : 1);
+		Empleado objSalida = empleadoService.actualizaEmpleado(objEmpleado);
+		if (objSalida == null) {
+			map.put("mensaje", "Error en actualizar");
+		} else {
+			List<Empleado> lista = empleadoService.listaPorNombreApellidoLike("%");
+			map.put("lista", lista);
 		}
 		return map;
 	}

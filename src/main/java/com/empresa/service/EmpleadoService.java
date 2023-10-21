@@ -14,4 +14,7 @@ public interface EmpleadoService {
 			
 	//Validaciòn Registrar
 		public abstract List<Empleado> listaPorNombreApellidoIgual(String nombre, String apellido); 
+		
+	//Actualizar
+		public abstract List<Empleado> listaPorNombreApellidoIgualActualiza(String nombre, String apellido, int idEmpleado);
 }
