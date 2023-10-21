@@ -20,6 +20,7 @@
  <h3>Crud de Empleado</h3>
  
  <div class="row" >  
+ 			<!--------------------------------------- PANEL Cabecera ----------------------------------------------->
 		   <div class="row" style="height: 70px">
 				<div class="col-md-2" >
 						<input class="form-control" id="id_txt_filtro"  name="filtro" placeholder="Ingrese el nombre" type="text" maxlength="30"/>
@@ -31,6 +32,7 @@
 					<button type="button" data-toggle='modal'  data-target="#id_div_modal_registra"  class='btn btn-success' style="width: 150px">REGISTRA</button>
 				</div>
 			</div>
+			<!--------------------------------------- GRILLA - Tabla ----------------------------------------------->
 			<div class="row" > 
 				<div class="col-md-12">
 						<div class="content" >
@@ -40,110 +42,106 @@
 										<th style="width: 5%">Código</th>
 										<th style="width: 20%">Nombres</th>
 										<th style="width: 20%">Apellidos</th>
-										<th style="width: 15%">F.Nacimiento</th>
+										<th style="width: 15%">Fecha de Nacimiento</th>
 										<th style="width: 20%">País</th>
 										<th style="width: 10%">Actualiza</th>
 										<th style="width: 10%">Elimina</th>
 									</tr>
 								</thead>
-									<tbody>
-									</tbody>
 								</table>
 						</div>	
 				</div>
 			</div>
 </div>
 </div>
-
+<!--------------------------------------- MODAL de registro ----------------------------------------------->
   	 <div class="modal fade" id="id_div_modal_registra" >
 			<div class="modal-dialog" style="width: 60%">
-		
-				<!-- Modal content-->
+					<!-- Modal content-->
 				<div class="modal-content">
-				<div class="modal-header" style="padding: 35px 50px">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4><span class="glyphicon glyphicon-ok-sign"></span> Registro de modalidad</h4>
-				</div>
-				<div class="modal-body" style="padding: 20px 10px;">
-						<form id="id_form_registra" accept-charset="UTF-8" action="registraActualizaCrudModalidad" class="form-horizontal"     method="post">
-		                    <div class="panel-group" id="steps">
-		                        <!-- Step 1 -->
-		                        <div class="panel panel-default">
-		                            <div class="panel-heading">
-		                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#steps" href="#stepOne">Datos de Modalidad</a></h4>
-		                            </div>
-		                            <div id="stepOne" class="panel-collapse collapse in">
-		                                <div class="panel-body">
-		                                     <div class="form-group">
-		                                        <label class="col-lg-3 control-label" for="id_reg_nombres">Nombres</label>
-		                                        <div class="col-lg-8">
-													<input class="form-control" id="id_reg_nombres" name="nombres" placeholder="Ingrese el nombre" type="text" maxlength="40"/>
-		                                        </div>
-		                                    </div>
-		                                    <div class="form-group">
-		                                        <label class="col-lg-3 control-label" for="id_reg_apellidos">Apellidos</label>
-		                                        <div class="col-lg-3">
-													<input class="form-control" id="id_reg_apellidos" name="apellidos" placeholder="Ingrese el apellidos" type="text" maxlength="40"/>
-		                                        </div>
-		                                    </div>
-		                                    <div class="form-group">
-		                                        <label class="col-lg-3 control-label" for="id_reg_fecha_nacimiento">F.Nacimiento</label>
-		                                        <div class="col-lg-3">
-													<input class="form-control" id="id_reg_fecha_nacimiento" name="fechaNacimiento" type="date"/>
-		                                        </div>
-		                                    </div>		   
-		                                    <div class="form-group">
-		                                        <label class="col-lg-3 control-label" for="id_reg_pais">País</label>
-		                                        <div class="col-lg-3">
-													 <select id="id_reg_pais" name="pais" class='form-control'>
-							                            	<option value=" ">[Seleccione]</option>    
-							                         </select>
-		                                        </div>
-		                                    </div>
-		                                    <div class="form-group">
-		                                        <div class="col-lg-9 col-lg-offset-3">
-		                                        	<button type="button" class="btn btn-primary" id="id_btn_registra">REGISTRA</button>
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                            </div>
-		                        </div>
-		                        
-		                    </div>
-		                </form>   
-				
+					<div class="modal-header" style="padding: 35px 50px">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4><span class="glyphicon glyphicon-ok-sign"></span> Registro de modalidad</h4>
+					</div>
+					<div class="modal-body" style="padding: 20px 10px;">
+							<form id="id_form_registra" accept-charset="UTF-8" action="registraActualizaCrudModalidad" class="form-horizontal"  method="post">
+			                    <div class="panel-group" id="steps">
+			                        <!-- Step 1 -->
+			                        <div class="panel panel-default">
+			                            <div class="panel-heading">
+			                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#steps" href="#stepOne">Datos de Modalidad</a></h4>
+			                            </div>
+			                            <div id="stepOne" class="panel-collapse collapse in">
+			                                <div class="panel-body">
+			                                     <div class="form-group">
+			                                        <label class="col-lg-3 control-label" for="id_reg_nombres">Nombres</label>
+			                                        <div class="col-lg-8">
+														<input class="form-control" id="id_reg_nombres" name="nombres" placeholder="Ingrese el nombre" type="text" maxlength="40"/>
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <label class="col-lg-3 control-label" for="id_reg_apellidos">Apellidos</label>
+			                                        <div class="col-lg-3">
+														<input class="form-control" id="id_reg_apellidos" name="apellidos" placeholder="Ingrese el apellidos" type="text" maxlength="40"/>
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <label class="col-lg-3 control-label" for="id_reg_fecha_nacimiento">Fecha de nacimiento</label>
+			                                        <div class="col-lg-3">
+														<input class="form-control" id="id_reg_fecha_nacimiento" name="fechaNacimiento" type="date"/>
+			                                        </div>
+			                                    </div>		   
+			                                    <div class="form-group">
+			                                        <label class="col-lg-3 control-label" for="id_reg_pais">País</label>
+			                                        <div class="col-lg-3">
+														 <select id="id_reg_pais" name="pais" class='form-control'>
+								                            	<option value=" ">[Seleccione]</option>    
+								                         </select>
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <div class="col-lg-9 col-lg-offset-3">
+			                                        	<button type="button" class="btn btn-primary" id="id_btn_registra">REGISTRA</button>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </form>   
+					
+					</div>
 				</div>
 			</div>
-		</div>
-			
 		</div>
 </body>
 
 <script type="text/javascript">
+//------------------------ LISTAR paises en el CBO ---------------------------------------------
+//-- Mostrar la lista de Países en el cbo --Viene del PaisService y PaisServiceImpl ----------
 $.getJSON("listaPais", {}, function(data){
 	$.each(data, function(i,item){
 		$("#id_reg_pais").append("<option value="+item.idPais +">"+ item.nombre +"</option>");
 	});
 });
-
+//------------------------ Mostrar lista de registros en GRILLA ---------------------------
+//---- Al cargar el documento, mostrar las filas en la grilla, esto se logra pasando un valor vacío al parámetro "filtro" del Controller -----------
 $(document).ready(function() {
 	$.getJSON("consultaCrudEmpleado",{"filtro":""}, function (lista){
 		agregarGrilla(lista);
 	});
 });
-
-$("#id_btn_filtrar").click(function(){
-	var fil=$("#id_txt_filtro").val();
-	$.getJSON("consultaCrudEmpleado",{"filtro":fil}, function (lista){
-		agregarGrilla(lista);
-	});
-});
+//---------------------------------- Botón FILTRA ------------------------------------------
+//----- Al dar click en el botón FILTRA, crear variable "fil" que recoja el valor de la caja de texto, luego llamar al método "consultaCrudEmpleado" del Controller
+//y pasarle por parámetro la variable, luego agregarlo a la grilla
 
 
+
+//---------------------------------- Método para agregar una fila a la grilla  ------------------------------------------
 function agregarGrilla(lista){
-	 $('#id_table').DataTable().clear();
-	 $('#id_table').DataTable().destroy();
-	 $('#id_table').DataTable({
+	 $('#id_table').DataTable().clear(); //Limpiar tabla
+	 $('#id_table').DataTable().destroy(); //Destruye la instancia anterior de la tabla
+	 $('#id_table').DataTable({ //Crea una nueva instancia de la tabla,
 			data: lista,
 			searching: false,
 			ordering: true,
@@ -168,6 +166,7 @@ function agregarGrilla(lista){
 	    });
 }
 
+//--------------------- Botón REGISTRA del modal de registro ---------------------
 $("#id_btn_registra").click(function(){
 	var validator = $('#id_form_registra').data('bootstrapValidator');
     validator.validate();

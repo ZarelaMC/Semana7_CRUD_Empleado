@@ -44,17 +44,16 @@ public class EmpleadoCrudController {
 	@PostMapping("/registraCrudEmpleado")
 	@ResponseBody
 	public Map<?, ?> registra(Empleado obj) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>(); /*Permite colocar los mensajes*/
 		obj.setEstado(1);
-		obj.setFechaRegistro(new Date());
-		obj.setFechaActualizacion(new Date());
+		//Datos que se llenarán por defecto, automáticamente
+		obj.setFechaRegistro(new Date()); //Toma la fecha del sistema
+		obj.setFechaActualizacion(new Date()); //Toma la fecha del sistema
 		
 		List<Empleado> lstSalida = empleadoService.
 				//VALIDACIÒN PARA IMPEDIR QUE SE REGISTRE UN EMPLEADO CUYO NOMBRE Y APELLIDOS EN CONJUNO YA EXISTAN
-						listaPorNombreApellidoIgual(
-								obj.getNombres(), 
-								obj.getApellidos());
-		if (!CollectionUtils.isEmpty(lstSalida)) {
+						listaPorNombreApellidoIgual(obj.getNombres(), obj.getApellidos());
+		if (!CollectionUtils.isEmpty(lstSalida)) { //Si la lista es vacía, no trae datos coincidentes, 
 			map.put("mensaje", "El empleado " + obj.getNombres() + " " + obj.getApellidos() + " ya existe");
 			return map;
 		}
@@ -63,8 +62,10 @@ public class EmpleadoCrudController {
 		if (objSalida == null) {
 			map.put("mensaje", "Error en el registro");
 		} else {
+			//Actualizar la Grilla en el navegador al hacer un registro
 			List<Empleado> lista = empleadoService.listaPorNombreApellidoLike("%");
 			map.put("lista", lista);
+			//Mostrar mensaje de confirmación
 			map.put("mensaje", "Registro exitoso");
 		}
 		return map;
