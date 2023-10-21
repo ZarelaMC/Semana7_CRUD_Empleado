@@ -39,11 +39,11 @@
 							<table id="id_table" class="table table-striped table-bordered" >
 								<thead>
 									<tr>
-										<th style="width: 5%">CÛdigo</th>
+										<th style="width: 5%">C√≥digo</th>
 										<th style="width: 20%">Nombres</th>
 										<th style="width: 20%">Apellidos</th>
 										<th style="width: 15%">Fecha de Nacimiento</th>
-										<th style="width: 20%">PaÌs</th>
+										<th style="width: 20%">Pa√≠s</th>
 										<th style="width: 10%">Actualiza</th>
 										<th style="width: 10%">Elimina</th>
 									</tr>
@@ -92,7 +92,7 @@
 			                                        </div>
 			                                    </div>		   
 			                                    <div class="form-group">
-			                                        <label class="col-lg-3 control-label" for="id_reg_pais">PaÌs</label>
+			                                        <label class="col-lg-3 control-label" for="id_reg_pais">Pa√≠s</label>
 			                                        <div class="col-lg-3">
 														 <select id="id_reg_pais" name="pais" class='form-control'>
 								                            	<option value=" ">[Seleccione]</option>    
@@ -118,26 +118,31 @@
 
 <script type="text/javascript">
 //------------------------ LISTAR paises en el CBO ---------------------------------------------
-//-- Mostrar la lista de PaÌses en el cbo --Viene del PaisService y PaisServiceImpl ----------
+//-- Mostrar la lista de Pa√≠ses en el cbo --Viene del PaisService y PaisServiceImpl ----------
 $.getJSON("listaPais", {}, function(data){
 	$.each(data, function(i,item){
 		$("#id_reg_pais").append("<option value="+item.idPais +">"+ item.nombre +"</option>");
 	});
 });
 //------------------------ Mostrar lista de registros en GRILLA ---------------------------
-//---- Al cargar el documento, mostrar las filas en la grilla, esto se logra pasando un valor vacÌo al par·metro "filtro" del Controller -----------
+//---- Al cargar el documento, mostrar las filas en la grilla, esto se logra pasando un valor vac√≠o al par√°metro "filtro" del Controller -----------
 $(document).ready(function() {
 	$.getJSON("consultaCrudEmpleado",{"filtro":""}, function (lista){
 		agregarGrilla(lista);
 	});
 });
-//---------------------------------- BotÛn FILTRA ------------------------------------------
-//----- Al dar click en el botÛn FILTRA, crear variable "fil" que recoja el valor de la caja de texto, luego llamar al mÈtodo "consultaCrudEmpleado" del Controller
-//y pasarle por par·metro la variable, luego agregarlo a la grilla
+//---------------------------------- Bot√≥n FILTRA ------------------------------------------
+//----- Al dar click en el bot√≥n FILTRA, crear variable "fil" que recoja el valor de la caja de texto, luego llamar al m√©todo "consultaCrudEmpleado" del Controller
+//y pasarle por par√°metro la variable, luego agregarlo a la grilla
+$("#id_btn_filtrar").click(function(){
+	var fil=$("#id_txt_filtro").val();
+	$.getJSON("consultaCrudEmpleado",{"filtro":fil}, function (lista){
+		agregarGrilla(lista);
+	});
+});
 
 
-
-//---------------------------------- MÈtodo para agregar una fila a la grilla  ------------------------------------------
+//---------------------------------- M√©todo para agregar una fila a la grilla  ------------------------------------------
 function agregarGrilla(lista){
 	 $('#id_table').DataTable().clear(); //Limpiar tabla
 	 $('#id_table').DataTable().destroy(); //Destruye la instancia anterior de la tabla
@@ -166,7 +171,7 @@ function agregarGrilla(lista){
 	    });
 }
 
-//--------------------- BotÛn REGISTRA del modal de registro ---------------------
+//--------------------- Bot√≥n REGISTRA del modal de registro ---------------------
 $("#id_btn_registra").click(function(){
 	var validator = $('#id_form_registra').data('bootstrapValidator');
     validator.validate();
@@ -249,7 +254,7 @@ $('#id_form_registra').bootstrapValidator({
     		selector : '#id_reg_pais',
             validators: {
             	notEmpty: {
-                    message: 'El paÌs un campo obligatorio'
+                    message: 'El pa√≠s un campo obligatorio'
                 },
             }
         },
@@ -259,9 +264,3 @@ $('#id_form_registra').bootstrapValidator({
 </script>
 
 </html>
-
-
-
-
-
-
